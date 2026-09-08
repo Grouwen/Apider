@@ -1,0 +1,20 @@
+## 用户需求
+{{ user_input }}
+
+{% if task %}
+## 历史总结
+目标:
+{{ task }}
+关键发现:
+{% for item in confirmed %}"{{ item }}"{% if not loop.last %}, {% endif %}{% endfor %}
+尝试过的信息:
+{% for attempt in attempts %}
+{"action": "{{ attempt.action }}", "result": "{{ attempt.result }}", "value": "{{ attempt.value }}"}{% if not loop.last %},{% endif %}
+{% endfor %}
+当前主要卡点:
+{% if blocker %}"{{ blocker }}"{% else %}无{% endif %}
+{% if next_best %}
+建议下一步：
+{{ next_best }}
+{% endif %}
+{% endif %}
