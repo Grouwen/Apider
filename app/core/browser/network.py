@@ -52,3 +52,8 @@ class Network:
                 response.response_result = ResponseResult.from_dict(response_result)
                 return response
         return None
+
+    async def get_cookie(self)->List[dict]:
+        result = await self.cdp.send("Network.getAllCookies")
+        cookies: List[dict] = result.get("cookies", [])
+        return cookies

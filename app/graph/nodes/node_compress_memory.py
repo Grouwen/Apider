@@ -35,6 +35,7 @@ async def node_compress_memory(state: ApiderState, runtime: Runtime[ApiderContex
         compress_memory_prompt = await load_compress_memory_prompt(user_input,
                                                                    history_compress,
                                                                    short_memory_context_list)
+
     except Exception as e:
         print("调用压缩llm失败，错误原因：",str(e))
         return {
