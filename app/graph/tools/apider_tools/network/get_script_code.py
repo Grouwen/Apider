@@ -18,9 +18,9 @@ class GetScriptCode(BaseTool):
         ToolArgsDescription(name="start_column", type=ToolArgsType.INT,
                             description="从源码的第几列开始返回", required=True),
         ToolArgsDescription(name="end_line", type=ToolArgsType.INT,
-                            description="获取源码结束行", required=True),
+                            description="到源码的第几行结束返回", required=True),
         ToolArgsDescription(name="end_column", type=ToolArgsType.INT,
-                            description="获取源码结束列", required=True),
+                            description="到源码的第几列结束返回", required=True),
         ToolArgsDescription(name="max_len", type=ToolArgsType.INT,
                             description=f"返回的最大字符数，默认5000，不能超过{MAX_SCRIPT_CODE_CHARS}", required=False)
     ]
@@ -65,6 +65,7 @@ class GetScriptCode(BaseTool):
             if result:
                 return ToolResult.ok(data=[{"code": result}],
                                      summary=f"获取js源码成功。最大字符数:{max_len}")
-            return ToolResult.error(f"获取script_id:{script_id}代码失败","js代码为空")
+            return ToolResult.error(f"获取script_id:{script_id}代码失败",
+                                    f"该脚本共{len(code_with_line)}行，initiator 格式为 script_id:line:column，请按列区间取码，如 start_line=1,end_line=1, start_column=90500, end_column=91000")
         except Exception as e:
             return ToolResult.error( f"获取script_id:{script_id}代码失败", str(e))

@@ -20,3 +20,7 @@ class ApiderState(TypedDict):
     max_tool_count:int # 最大工具调用次数
 
     tool_token:int # 工具耗费token总数，达到MAX_COMPRESS_TOKEN_SIZE进行压缩
+
+    request_list:List[dict] # 请求列表
+    script_list:List[dict] # js脚本列表
+    facts:List[str] # 已确认的事实

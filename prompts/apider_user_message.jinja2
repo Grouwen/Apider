@@ -1,6 +1,23 @@
 ## 用户需求
 {{ user_input }}
 
+{% if script_list %}
+## script_list:
+{{ script_list }}
+{% endif %}
+
+{% if request_list %}
+## request_list:
+{{ request_list }}
+{% endif %}
+
+{% if facts %}
+## 已确认的事实：
+{% for fact in facts %}
+{{ loop.index }}. {{ fact }}
+{% endfor %}
+{% endif %}
+
 {% if task %}
 ## 历史总结
 目标:

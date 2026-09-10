@@ -9,6 +9,8 @@ async def node_after_one_act(state:ApiderState):
     max_tool_count = state.get("max_tool_count", MAX_TOOL_COUNT)
     consume_tokens = state.get("consume_tokens",0)
 
+    # 写回
+
     # 计算token
     total_tokens = llm_resp.usage_metadata.get("total_tokens", 0) if llm_resp.usage_metadata else 0
     input_tokens = llm_resp.usage_metadata.get("input_tokens", 0) if llm_resp.usage_metadata else 0

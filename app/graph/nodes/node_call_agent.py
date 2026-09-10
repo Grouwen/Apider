@@ -9,6 +9,9 @@ async def node_call_agent(state:ApiderState,runtime:Runtime[ApiderContext]):
     user_input = state["user_input"]
     tools = state["tools"]
     short_memory_context_list = state.get("short_memory_context_list",[])
+    facts = state.get("facts",[])
+    request_list = state.get("request_list",[])
+    script_list = state.get("script_list",[])
     history_compress = state.get("history_compress",{})
     llm_model = runtime.context["llm_model"]
 
@@ -17,9 +20,12 @@ async def node_call_agent(state:ApiderState,runtime:Runtime[ApiderContext]):
 
     # 拼接message
     system_message = await load_prompt("apider_system_message.jinja2")
-    user_message = await load_apider_user_message_prompt(user_input,history_compress)
+    user_message = await load_apider_user_message_prompt(user_input=user_input,
+                                                         facts=facts,
+                                                         request_list=request_list,
+                                                         script_list=script_list,
+                                                         history_compress=history_compress)
     messages = [
-        # {"role": "system", "content": "你是专业JS逆向工程师，根据用户需求，分析网站的接口使用了什么加密方式。"},
         {"role": "system", "content": system_message},
         {"role": "user", "content": user_message},
     ]

@@ -35,6 +35,7 @@ async def node_compress_memory(state: ApiderState, runtime: Runtime[ApiderContex
         compress_memory_prompt = await load_compress_memory_prompt(user_input,
                                                                    history_compress,
                                                                    short_memory_context_list)
+        history_compress = await chain.ainvoke(compress_memory_prompt)
 
     except Exception as e:
         print("调用压缩llm失败，错误原因：",str(e))
@@ -42,7 +43,7 @@ async def node_compress_memory(state: ApiderState, runtime: Runtime[ApiderContex
             "history_compress": history_compress,
             "tool_token": tool_token
         }
-    history_compress = await chain.ainvoke(compress_memory_prompt)
+
     print(f"压缩后的数据:{history_compress}")
 
     return {

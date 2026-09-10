@@ -14,9 +14,17 @@ async def load_prompt(prompt_file_name:str,**kwargs):
     return template.format(**kwargs)
 
 
-async def load_apider_user_message_prompt(user_input:str,history_compress:Dict[str,Any])->str:
+async def load_apider_user_message_prompt(user_input:str,
+                                          facts:List[str],
+                                          request_list:List[dict],
+                                          script_list:List[dict],
+                                          history_compress:Dict[str,Any])->str:
     user_message = await load_prompt("apider_user_message.jinja2",
-                      user_input=user_input,**history_compress)
+                                     facts=facts,
+                                     user_input=user_input,
+                                     request_list=request_list,
+                                     script_list=script_list,
+                                     **history_compress)
     return user_message
 
 async def load_compress_memory_prompt(user_input: str,history_compress: Dict[str,Any],
