@@ -163,5 +163,3 @@ cython_debug/
 .idea/
 
 app/test/
-
-app/main.py

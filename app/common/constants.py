@@ -8,10 +8,10 @@ PROMPT_FILE_PATH: Final[Path] = Path(__file__).parents[2] / "prompts"
 LOGPOINT_TAG = "[CHAR_LOGPOINT]"
 
 # 最大触发总结的token数
-MAX_COMPRESS_TOKEN_SIZE = 1*10000
+MAX_COMPRESS_TOKEN_SIZE = 4*10000
 
 # get_script_code最大字符数
-MAX_SCRIPT_CODE_CHARS = 30000
+MAX_SCRIPT_CODE_CHARS = 20000
 
 # 噪声匹配
 GENERIC_NOISE_PATTERNS = (

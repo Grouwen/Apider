@@ -16,5 +16,18 @@ class ListScripts(BaseTool):
     async def run(self) -> ToolResult:
         scripts_list = await self.browser_oper.debug.get_scripts_list()
         # 处理list_scripts只返回scriptId和url
-        result_list = [{script.script_id: script.url} for script in scripts_list]
-        return ToolResult.ok(data=result_list,summary="获取js列表成功，格式为{'scriptId':'url'}")
+        js_with_url_list = []
+        dynamic_js_list = []
+        for script in scripts_list:
+            id = script.script_id
+            if script.url.startswith("动态"):
+                dynamic_js_list.append(id)
+                continue
+            js_with_url_list.append({
+                id: script.url
+            })
+
+        return ToolResult.ok(data=[{
+            "normal_js_list": js_with_url_list,
+            "dynamic_js_list": dynamic_js_list,
+        }],summary="获取js列表成功，格式为{'scriptId':'url'}")

@@ -73,6 +73,6 @@ async def main(user_input:str,headless:bool = True):
 
 if __name__ == '__main__':
     headless = False
-    input_target = "分析这个页面初始化时如何加载的数据https://spa2.scrape.center/，"
+    input_target = "分析这个页面登录逻辑https://buff.163.com/"
 
     asyncio.run(main(input_target,headless))

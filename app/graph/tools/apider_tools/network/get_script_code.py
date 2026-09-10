@@ -22,14 +22,14 @@ class GetScriptCode(BaseTool):
         ToolArgsDescription(name="end_column", type=ToolArgsType.INT,
                             description="获取源码结束列", required=True),
         ToolArgsDescription(name="max_len", type=ToolArgsType.INT,
-                            description=f"返回的最大字符数，默认10000，不能超过{MAX_SCRIPT_CODE_CHARS}", required=False)
+                            description=f"返回的最大字符数，默认5000，不能超过{MAX_SCRIPT_CODE_CHARS}", required=False)
     ]
 
     def __init__(self, browser_oper: BrowserOper):
         self.browser_oper = browser_oper
 
     async def run(self,script_id:str,start_line:int,start_column:int,
-                  end_line:int,end_column:int,max_len:int=10000) -> ToolResult:
+                  end_line:int,end_column:int,max_len:int=5000) -> ToolResult:
         """
         根据script_id获取js源码
         :param script_id: js的script_id
