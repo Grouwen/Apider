@@ -117,5 +117,6 @@ async def node_tool_run(state:ApiderState,runtime:Runtime[ApiderContext]):
         "tool_count":tool_count,
         "long_memory_context_list": final_results,
         "short_memory_context_list": final_results,
+        "current_tool_result":final_results,
         **update_prompt_dict,
     }

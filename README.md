@@ -124,6 +124,18 @@ COMPRESS_MEMORY_MODEL_LLM_MODEL=gpt-4o-mini
 COMPRESS_MEMORY_MODEL_LLM_API_KEY=sk-xxxx
 COMPRESS_MEMORY_MODEL_LLM_BASE_URL=https://api.openai.com/v1
 ```
+### 用户配置
+
+你可以在/config/config.yaml中自定义配置
+```yaml
+graph:
+  compress:
+    # 触发总结的token数
+    token_size: 40000
+  tool:
+    # 最大调用工具次数
+    tool_count: 30
+```
 
 ### 运行
 

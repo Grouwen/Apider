@@ -12,6 +12,7 @@ class ApiderState(TypedDict):
 
     long_memory_context_list: Annotated[List[Dict[str, Any]], add] # 长期记忆（工具执行结果）
     short_memory_context_list: Annotated[List[Dict[str, Any]], add] # 短期记忆（工具执行结果）
+    current_tool_result:List[dict] # 本次轮次的tool执行结果与ai message
     tool_count: int # 调用工具次数
 
     history_compress: Dict[str,Any] # 历史工具调用总结

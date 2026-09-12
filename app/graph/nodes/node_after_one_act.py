@@ -1,15 +1,19 @@
+from langgraph.runtime import Runtime
+
 from app.common.constants import MAX_TOOL_COUNT
+
+from app.graph.apider_context import ApiderContext
 from app.graph.apider_state import ApiderState
 from app.util.graph_util import hitl_is_continue
 
 
-async def node_after_one_act(state:ApiderState):
+async def node_after_one_act(state:ApiderState,runtime:Runtime[ApiderContext]):
     llm_resp = state["llm_resp"]
     tool_count = state["tool_count"]
-    max_tool_count = state.get("max_tool_count", MAX_TOOL_COUNT)
+    user_config = runtime.context["user_config"]
+    user_max_tool_count = user_config.get("graph.tool.tool_count",MAX_TOOL_COUNT)
+    max_tool_count = state.get("max_tool_count", user_max_tool_count)
     consume_tokens = state.get("consume_tokens",0)
-
-    # 写回
 
     # 计算token
     total_tokens = llm_resp.usage_metadata.get("total_tokens", 0) if llm_resp.usage_metadata else 0

@@ -4,6 +4,8 @@ import uuid
 from langgraph.types import Command
 from playwright.async_api import Playwright, Browser
 
+from app.common.constants import USER_CONFIG_PATH
+from app.config.user_config import UserConfig
 from app.core.browser.browser_oper import BrowserOper
 from app.graph.apider_context import ApiderContext
 from app.graph.apider_graph import apider_app
@@ -18,6 +20,9 @@ async def main(user_input:str,headless:bool = True):
     playwright = None
 
     try:
+        # 初始化config
+        user_config = UserConfig(USER_CONFIG_PATH)
+
         # 初始化 infrastructure
         llm_model = init_llm_model()
         compress_memory_llm_model = init_compress_memory_llm_model()
@@ -48,6 +53,7 @@ async def main(user_input:str,headless:bool = True):
             compress_memory_llm_model=compress_memory_llm_model,
             browser_oper=browser_oper,
             tool_registry=tool_registry,
+            user_config=user_config
         )
 
         # 运行graph
@@ -73,6 +79,6 @@ async def main(user_input:str,headless:bool = True):
 
 if __name__ == '__main__':
     headless = False
-    input_target = "分析这个页面登录逻辑https://buff.163.com/"
+    input_target = "分析这个页面数据加载逻辑https://spa2.scrape.center/"
 
     asyncio.run(main(input_target,headless))

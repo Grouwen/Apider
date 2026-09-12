@@ -5,16 +5,16 @@ from typing import Final
 PROMPT_FILE_PATH: Final[Path] = Path(__file__).parents[2] / "prompts"
 
 # logpoint标识
-LOGPOINT_TAG = "[CHAR_LOGPOINT]"
+LOGPOINT_TAG: Final[str] = "[CHAR_LOGPOINT]"
 
-# 最大触发总结的token数
-MAX_COMPRESS_TOKEN_SIZE = 4*10000
+# 默认最大触发总结的token数
+MAX_COMPRESS_TOKEN_SIZE: Final[int] = 4*10000
 
 # get_script_code最大字符数
-MAX_SCRIPT_CODE_CHARS = 20000
+MAX_SCRIPT_CODE_CHARS: Final[int] = 20000
 
 # 噪声匹配
-GENERIC_NOISE_PATTERNS = (
+GENERIC_NOISE_PATTERNS: Final[tuple] = (
     # 1) 浏览器内部协议与动态内存协议 (过滤 data:image, blob 等，但保留 data:application/wasm 供后续解析)
     r'^(blob|about|javascript|view-source|chrome|devtools):',
     r'^data:(?!application/(wasm|json))',  # 负向预查：过滤 data:image, data:text 等，放行 wasm 和 json
@@ -46,5 +46,8 @@ GENERIC_NOISE_PATTERNS = (
     r'^https?://\d{1,3}(\.\d{1,3}){3}(:\d+)?/',
 )
 
-# 最大工具调用次数
-MAX_TOOL_COUNT = 30
+# 默认最大工具调用次数
+MAX_TOOL_COUNT: Final[int] = 30
+
+# 用户配置文件存放位置
+USER_CONFIG_PATH: Final[Path]=Path(__file__).parents[2] / "config" / "config.yaml"

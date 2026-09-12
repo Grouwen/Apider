@@ -1,0 +1,7 @@
+graph:
+  compress:
+    # 触发总结的token数
+    token_size: 40000
+  tool:
+    # 最大调用工具次数
+    tool_count: 30
